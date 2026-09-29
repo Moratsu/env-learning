@@ -38,29 +38,6 @@ int main()
         bn::fixed x = dot.x();
         bn::fixed y =  dot.y();
 
-        if (bn::keypad::left_held())
-        {
-            dot.set_x(dot.x() - speed);
-        }
-        if (bn::keypad::right_held())
-        {
-            dot.set_x(dot.x() + speed);
-        }
-        if (bn::keypad::a_pressed())
-        {
-            dy -= jump_strength;
-        }
-
-        dy += gravity;
-
-        dot.set_y(dot.y() + dy);
-
-        if (dot.y() > FLOOR)
-        {
-            dot.set_y(FLOOR);
-            dy = 0;
-        }
-
         //Now, if the dot/character walks beyond the set min/max boundary set,
         //the dots x/y current y value will also be set to the max/min
         //so that they can never go beyond that point.
@@ -95,6 +72,29 @@ int main()
         //update the values after processing them for it to actually work.
         dot.set_x(x);
         dot.set_y(y);
+
+        if (bn::keypad::left_held())
+        {
+            dot.set_x(dot.x() - speed);
+        }
+        if (bn::keypad::right_held())
+        {
+            dot.set_x(dot.x() + speed);
+        }
+        if (bn::keypad::a_pressed())
+        {
+            dy -= jump_strength;
+        }
+
+        dy += gravity;
+
+        dot.set_y(dot.y() + dy);
+
+        if (dot.y() > FLOOR)
+        {
+            dot.set_y(FLOOR);
+            dy = 0;
+        }
 
         bn::core::update();
     }
